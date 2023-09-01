@@ -24,6 +24,9 @@ class DeepgramService {
 
     channel.stream.listen((event) async {
       final parsedJson = jsonDecode(event);
+      if (!validateDeepgramJson(parsedJson, event)) {
+        return;
+      }
       updateTextCallback(parsedJson['channel']['alternatives'][0]['transcript']);
     });
 
@@ -52,5 +55,43 @@ class DeepgramService {
     channel.sink.close();
   }
 }
+
+
+// Valide Json
+
+bool validateDeepgramJson(Map<String, dynamic>? parsedJson, String originalJson) {
+  if (parsedJson == null) {
+    print("Parsed JSON is null");
+    print("Original JSON String: $originalJson");
+    return false;
+  }
+
+  if (!parsedJson.containsKey('channel')) {
+    print("Missing key: 'channel'");
+    print("Original JSON String: $originalJson");
+    return false;
+  }
+
+  if (!parsedJson['channel'].containsKey('alternatives')) {
+    print("Missing key: 'channel -> alternatives'");
+    print("Original JSON String: $originalJson");
+    return false;
+  }
+
+  if (!parsedJson['channel']['alternatives'].isNotEmpty) {
+    print("Empty array: 'channel -> alternatives'");
+    print("Original JSON String: $originalJson");
+    return false;
+  }
+
+  if (!parsedJson['channel']['alternatives'][0].containsKey('transcript')) {
+    print("Missing key: 'channel -> alternatives -> [0] -> transcript'");
+    print("Original JSON String: $originalJson");
+    return false;
+  }
+
+  return true;
+}
+
 
 

@@ -2,14 +2,11 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 
-import 'dart:async';
-import 'dart:math';
-
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_blue/flutter_blue.dart';
+
+import '../../backend/bluetooth.dart';
 
 import 'home_page_model.dart';
 export 'home_page_model.dart';
@@ -98,15 +95,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   alignment: AlignmentDirectional(0.0, 0.0),
                   child: FFButtonWidget(
                     onPressed: () {
-                        FlutterBlue flutterBlue = FlutterBlue.instance;
-                        flutterBlue.startScan(timeout: Duration(seconds: 4));
-                        flutterBlue.scanResults.listen((results) {
-                          for (ScanResult r in results) {
-                            print('${r.device.name} found! rssi: ${r.rssi}');
-                          }
-                        });
-                        flutterBlue.stopScan();
-                    },
+                        scanAndPrintDevices();
+                      },
                     text: 'Connect',
                     options: FFButtonOptions(
                       width: 190.0,

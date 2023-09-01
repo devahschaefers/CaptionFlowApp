@@ -8,13 +8,11 @@ import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
 import 'flutter_flow/nav/nav.dart';
 import 'index.dart';
-import 'background.dart';
+import 'backend/background.dart';
 
 void main() async {
-
   WidgetsFlutterBinding.ensureInitialized();
   usePathUrlStrategy();
-
   await FlutterFlowTheme.initialize();
 
   runApp(MyApp());
@@ -43,6 +41,7 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     _appStateNotifier = AppStateNotifier.instance;
     _router = createRouter(_appStateNotifier);
+
   }
 
   void setLocale(String language) {
