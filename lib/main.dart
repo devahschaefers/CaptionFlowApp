@@ -17,7 +17,7 @@ void main() async {
 
   runApp(MyApp());
   print('Starting background task');
-  initBackgroundTask();
+  initDeepgram();
 }
 
 class MyApp extends StatefulWidget {

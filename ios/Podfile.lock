@@ -1,18 +1,13 @@
 PODS:
   - Flutter (1.0.0)
-  - flutter_blue (0.0.1):
+  - flutter_blue_plus (0.0.1):
     - Flutter
-    - flutter_blue/Protos (= 0.0.1)
-  - flutter_blue/Protos (0.0.1):
-    - Flutter
-    - Protobuf (~> 3.11.4)
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
-  - Protobuf (3.11.4)
   - shared_preferences_ios (0.0.1):
     - Flutter
   - sound_stream (0.0.1):
@@ -25,7 +20,7 @@ PODS:
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
-  - flutter_blue (from `.symlinks/plugins/flutter_blue/ios`)
+  - flutter_blue_plus (from `.symlinks/plugins/flutter_blue_plus/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - shared_preferences_ios (from `.symlinks/plugins/shared_preferences_ios/ios`)
   - sound_stream (from `.symlinks/plugins/sound_stream/ios`)
@@ -35,13 +30,12 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - FMDB
-    - Protobuf
 
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
-  flutter_blue:
-    :path: ".symlinks/plugins/flutter_blue/ios"
+  flutter_blue_plus:
+    :path: ".symlinks/plugins/flutter_blue_plus/ios"
   path_provider_foundation:
     :path: ".symlinks/plugins/path_provider_foundation/darwin"
   shared_preferences_ios:
@@ -55,15 +49,14 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
-  flutter_blue: eeb381dc4727a0954dede73515f683865494b370
+  flutter_blue_plus: 4837da7d00cf5d441fdd6635b3a57f936778ea96
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   path_provider_foundation: c68054786f1b4f3343858c1e1d0caaded73f0be9
-  Protobuf: 176220c526ad8bd09ab1fb40a978eac3fef665f7
   shared_preferences_ios: 548a61f8053b9b8a49ac19c1ffbc8b92c50d68ad
   sound_stream: eba0f2a5994b91d9e5009a739df6e98515a7b44f
   sqflite: 6d358c025f5b867b29ed92fc697fd34924e11904
   url_launcher_ios: 08a3dfac5fb39e8759aeb0abbd5d9480f30fc8b4
 
-PODFILE CHECKSUM: 04c8c19048650783264cefb9c25263241cea3aeb
+PODFILE CHECKSUM: 70d9d25280d0dd177a5f637cdb0f0b0b12c6a189
 
-COCOAPODS: 1.12.1
+COCOAPODS: 1.13.0

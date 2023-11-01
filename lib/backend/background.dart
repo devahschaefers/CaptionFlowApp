@@ -1,10 +1,17 @@
 import 'deepgram_service.dart';
+import 'bluetooth.dart';
 
-void initBackgroundTask() async {
+
+
+void initDeepgram() async {
   // Define a function that will be called every time a new transcription is available
   void handleTranscription(String transcript) {
-    print("New transcription: $transcript");
-    // You can handle the transcription here directly, like storing it, etc.
+    if (isConnected()) {
+      writeToDevice(transcript);
+      print("sent to glasses: $transcript");
+    } else {
+      print("No connection New transcription: $transcript");
+    }
   }
 
   final deepgramService = DeepgramService(

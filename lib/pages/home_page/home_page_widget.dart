@@ -95,7 +95,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   alignment: AlignmentDirectional(0.0, 0.0),
                   child: FFButtonWidget(
                     onPressed: () {
-                        scanAndPrintDevices();
+                        scanAndConnect();
                       },
                     text: 'Connect',
                     options: FFButtonOptions(
