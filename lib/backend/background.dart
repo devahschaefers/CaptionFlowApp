@@ -10,7 +10,7 @@ void initDeepgram() async {
       writeToDevice(transcript);
       print("sent to glasses: $transcript");
     } else {
-      print("No connection New transcription: $transcript");
+      print("Not connected. New transcription: $transcript");
     }
   }
 

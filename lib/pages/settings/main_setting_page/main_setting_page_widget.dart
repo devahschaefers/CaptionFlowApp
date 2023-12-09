@@ -5,8 +5,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'main_setting_page_model.dart';
 export 'main_setting_page_model.dart';
 
@@ -91,7 +89,7 @@ class _MainSettingPageWidgetState extends State<MainSettingPageWidget> {
             child: SwitchListTile.adaptive(
               value: _model.switchListTileValue1 ??= true,
               onChanged: (newValue) async {
-                setState(() => _model.switchListTileValue1 = newValue!);
+                setState(() => _model.switchListTileValue1 = newValue);
               },
               title: Text(
                 'Push Notifications',
@@ -112,7 +110,7 @@ class _MainSettingPageWidgetState extends State<MainSettingPageWidget> {
           SwitchListTile.adaptive(
             value: _model.switchListTileValue2 ??= true,
             onChanged: (newValue) async {
-              setState(() => _model.switchListTileValue2 = newValue!);
+              setState(() => _model.switchListTileValue2 = newValue);
             },
             title: Text(
               'Use Phone Microphone',

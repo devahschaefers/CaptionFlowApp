@@ -1,22 +1,19 @@
 import 'dart:async';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
-
 BluetoothDevice? _captionFlowGlassesDevice;
-
 
 void scanAndPrintDevices() async {
   // Setup Listener for scan results
   // device not found? see "Common Problems" in the README
   FlutterBluePlus.scanResults.listen((results) {
     for (ScanResult r in results) {
-      print('${r.device.localName} found! rssi: ${r.rssi}');
+      print('${r.device.platformName} found! rssi: ${r.rssi}');
     }
   });
 
   // Start scanning
   FlutterBluePlus.startScan(timeout: Duration(seconds: 4));
-
 }
 
 bool isConnectionAttemptInProgress = false;
@@ -25,20 +22,21 @@ void scanAndConnect() async {
   StreamSubscription? scanSubscription;
 
   // Make sure we're not already scanning
-  if (FlutterBluePlus.isScanningNow){
+  if (FlutterBluePlus.isScanningNow) {
     await FlutterBluePlus.stopScan();
   }
 
   // Setup Listener for scan results
   scanSubscription = FlutterBluePlus.scanResults.listen((results) {
     for (ScanResult r in results) {
-      if (r.device.localName == "CaptionFlow Glasses" && !isConnectionAttemptInProgress) {  
+      if (r.device.platformName == "CaptionFlow Glasses" &&
+          !isConnectionAttemptInProgress) {
         isConnectionAttemptInProgress = true; // Set the flag
-        print("Connecting to ${r.device.localName}");
+        print("Connecting to ${r.device.platformName}");
 
         // Attempt to connect
         r.device.connect().then((_) async {
-          print("Connected to ${r.device.localName}");
+          print("Connected to ${r.device.platformName}");
           // Stop scanning
           await FlutterBluePlus.stopScan();
 
@@ -62,10 +60,10 @@ void scanAndConnect() async {
 }
 
 Future<BluetoothDevice?> findConnectedCaptionFlowGlasses() async {
-  List<BluetoothDevice> connectedDevices = await FlutterBluePlus.connectedSystemDevices;
+  List<BluetoothDevice> connectedDevices = await FlutterBluePlus.systemDevices;
 
   for (BluetoothDevice device in connectedDevices) {
-    if (device.localName == "CaptionFlow Glasses") {
+    if (device.platformName == "CaptionFlow Glasses") {
       _captionFlowGlassesDevice = device;
       return device;
     }
@@ -85,9 +83,8 @@ void writeToDevice(String text) async {
     await _characteristic!.write(text.codeUnits);
     return;
   }
-  const String serviceUuid = "6e400001-b5a3-f393-e0a9-e50e24dcca9e";
-  const String characteristicUuid = "6e400002-b5a3-f393-e0a9-e50e24dcca9e";
-
+  const String serviceUuid = "84f347dc-4b00-11ee-be56-0242ac120002";
+  const String characteristicUuid = "84f34aac-4b00-11ee-be56-0242ac120002";
 
   if (_captionFlowGlassesDevice == null) {
     print("No device connected");
@@ -95,16 +92,19 @@ void writeToDevice(String text) async {
   }
 
   // Get the services
-  List<BluetoothService> services = await _captionFlowGlassesDevice!.discoverServices(); 
+  List<BluetoothService> services =
+      await _captionFlowGlassesDevice!.discoverServices();
 
   // Find the service we want
   BluetoothService? service;
+  print("services:");
   for (BluetoothService s in services) {
     if (s.uuid.toString() == serviceUuid) {
       service = s;
       break;
     }
   }
+  print("\n");
 
   if (service == null) {
     print("service not found");
@@ -114,6 +114,7 @@ void writeToDevice(String text) async {
   // Find the characteristic we want
   BluetoothCharacteristic? characteristic;
   for (BluetoothCharacteristic c in service.characteristics) {
+    print(c.uuid.toString());
     if (c.uuid.toString() == characteristicUuid) {
       characteristic = c;
       _characteristic = c;
@@ -128,5 +129,4 @@ void writeToDevice(String text) async {
 
   // Write to the characteristic
   await characteristic.write(text.codeUnits);
-
 }

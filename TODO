@@ -1,0 +1,5 @@
+Disconnected not handled gracefully
+
+Make it work in the background
+
+Make app have some sort of reflection that it is connected or not
